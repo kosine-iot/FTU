@@ -58,7 +58,7 @@ public class FileStorageService {
 
   public List<smartrackmodel> getAllassets() {
     List<smartrackmodel> ls = new ArrayList<>();
-    Set<String> device = repo.findDistinctDevId();
+    List<String> device = repo.findDistinctDevId();
     for(String st : device){
        ls.add(repo.findTopByDevIdOrderByIdDesc(st));
     }

@@ -13,7 +13,7 @@ public interface smartrackrepo extends MongoRepository<smartrackmodel,String> {
     smartrackmodel findTopByDevIdOrderByIdDesc(String devid);
 
     @Aggregation(pipeline = {"{ '$group': { '_id' : '$devId' } }","{ $sort: { id: 1 } }"})
-    Set<String> findDistinctDevId();
+    List<String> findDistinctDevId();
 
     @Query(value = "{devId: {$in: ?0}, timestamp: {$gte: ?1, $lte: ?2}}",sort = "{\"timestamp\": 1}")
     ArrayList<smartrackmodel> graphResponse(List<String> devId, long startdate, long endDate);
