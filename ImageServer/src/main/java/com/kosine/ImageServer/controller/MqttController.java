@@ -49,20 +49,22 @@ public class MqttController {
         String response = "";
         try {
             String topic = "kosine/psu/smartrack/key/"+devId;
-            String jsonString = "{\"key\":"+key+"}";
+            String jsonString = "{\"key\":\"" + key + "\"}";
 
             mqttService.subscribe(topic);
             JSONObject json = new JSONObject(jsonString);
             byte[] payload = json.toString().getBytes();
             MqttMessage message = new MqttMessage(payload);
-            mqttService.publish(topic, payload);
-            String msg = mqttService.receiveMessage();
-            if (message.toString().equals(msg)) {
-                response = "Command found";
-            } else {
-                response = "Command Not found";
+            for(int i=0;i<3;i++) {
+                mqttService.publish(topic, payload);
+                String msg = mqttService.receiveMessage();
+                if (message.toString().equals(msg)) {
+                    response = "Command found";
+                } else {
+                    response = "Command Not found";
+                }
+                mqttService.clearMessages();
             }
-            mqttService.clearMessages();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(response));
         }catch (Exception e){
             mqttService.clearMessages();
@@ -90,14 +92,16 @@ public class MqttController {
             JSONObject json = new JSONObject(jsonString);
             byte[] payload = json.toString().getBytes();
             MqttMessage message = new MqttMessage(payload);
-            mqttService.publish(topic, payload);
-            String msg = mqttService.receiveMessage();
-            if (message.toString().equals(msg)) {
-                response = "Command found";
-            } else {
-                response = "Command Not found";
+            for(int i=0;i<3;i++) {
+                mqttService.publish(topic, payload);
+                String msg = mqttService.receiveMessage();
+                if (message.toString().equals(msg)) {
+                    response = "Command found";
+                } else {
+                    response = "Command Not found";
+                }
+                mqttService.clearMessages();
             }
-            mqttService.clearMessages();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(response));
         }catch (Exception e){
             mqttService.clearMessages();

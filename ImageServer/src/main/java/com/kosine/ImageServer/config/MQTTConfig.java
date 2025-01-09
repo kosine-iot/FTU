@@ -38,6 +38,7 @@ public class MQTTConfig {
         options.setCleanSession(true);
         options.setUserName(username);
         options.setPassword(password.toCharArray());
+        options.setAutomaticReconnect(true);
         client.connect(options);
         logger.info("Connected to mqtt",clientId);
         return client;

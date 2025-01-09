@@ -40,4 +40,5 @@ D:\ImageServer\ImageServer\src\main\java\com\kosine\ImageServer\repository\Tutor
 D:\ImageServer\ImageServer\src\main\java\com\kosine\ImageServer\service\ExcelService.java
 D:\ImageServer\ImageServer\src\main\java\com\kosine\ImageServer\service\FileStorageService.java
 D:\ImageServer\ImageServer\src\main\java\com\kosine\ImageServer\service\MQTTService.java
+D:\ImageServer\ImageServer\src\main\java\com\kosine\ImageServer\shutdown\ShutdownHook.java
 D:\ImageServer\ImageServer\src\main\java\com\kosine\ImageServer\WebSecurityConfig.java

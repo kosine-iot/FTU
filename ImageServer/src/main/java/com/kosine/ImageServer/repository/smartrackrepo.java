@@ -1,5 +1,7 @@
 package com.kosine.ImageServer.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.kosine.ImageServer.model.smartrackmodel;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -16,7 +18,12 @@ public interface smartrackrepo extends MongoRepository<smartrackmodel,String> {
     List<String> findDistinctDevId();
 
     @Query(value = "{devId: {$in: ?0}, timestamp: {$gte: ?1, $lte: ?2}}",sort = "{\"timestamp\": 1}")
-    ArrayList<smartrackmodel> graphResponse(List<String> devId, long startdate, long endDate);
+    List<smartrackmodel> graphResponse(List<String> devId, long startdate, long endDate);
+
+    List<smartrackmodel> findTop1000ByDevIdOrderByTimestampDesc(String device);
+
+//    @Query(value = "{devId: {$in: ?0}, timestamp: {$gte: ?1, $lte: ?2}}", sort = "{timestamp: 1}")
+//    Page<smartrackmodel> findByDevIdAndTimestampBetween(List<String> devId, long startDate, long endDate, Pageable pageable);
 
     ArrayList<smartrackmodel> findTop30ByDevIdOrderByTimestampDesc(String device);
 }

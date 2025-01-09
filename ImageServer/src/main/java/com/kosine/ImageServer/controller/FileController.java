@@ -126,7 +126,7 @@ public class FileController {
   }
 
   @PostMapping("/graph")
-  public ResponseEntity<List<Map>> getAssetlive(@RequestBody GraphModel graphModel){
+  public ResponseEntity<?> getAssetlive(@RequestBody GraphModel graphModel){
       LocalDateTime startDate1 = graphModel.getStartDateTime();
       LocalDateTime endDate1 = graphModel.getEndDateTime();
 //            LocalDateTime startDate = startDate1.atTime(0, 0, 0);

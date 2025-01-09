@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,8 +34,15 @@ public class ExcelService {
     long start1 = start / 1000;
     long end1 = end / 1000;
 
+    List<smartrackmodel> tutorials = new ArrayList<>();
+    for(String st : graphModel.getDevId()){
 
-    List<smartrackmodel> tutorials = repository.graphResponse(graphModel.getDevId(),start1,end1);
+
+      tutorials = repository.findTop1000ByDevIdOrderByTimestampDesc(st);
+
+    }
+
+  //  List<smartrackmodel> tutorials = repository.graphResponse(graphModel.getDevId(),start1,end1);
 
     ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(tutorials);
     return in;

@@ -10,6 +10,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.BlockingQueue;
@@ -21,7 +22,8 @@ public class MQTTService {
     private static final Logger logger = LoggerFactory.getLogger(MQTTService.class);
     @Autowired
     private MqttClient mqttClient;
-
+    @Value("${kosine.mqtt.qos}")
+    private int qos;
     private BlockingQueue<String> messageQueue = new LinkedBlockingQueue<>();
 
     @PostConstruct
@@ -49,6 +51,7 @@ public class MQTTService {
     public void publish(String topic, byte[] payload) {
         try {
             MqttMessage message = new MqttMessage(payload);
+            message.setQos(qos);
             mqttClient.publish(topic, message);
         } catch (MqttException e) {
             e.printStackTrace();

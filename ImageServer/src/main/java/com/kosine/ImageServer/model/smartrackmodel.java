@@ -1,5 +1,6 @@
 package com.kosine.ImageServer.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.lang.annotation.Documented;
@@ -7,6 +8,7 @@ import java.lang.annotation.Documented;
 
 @Document(collection = "smartrack")
 public class smartrackmodel {
+    @Id
     private String id;
     private String devId;
 
